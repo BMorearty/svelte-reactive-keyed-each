@@ -1,12 +1,12 @@
 <script>
   import { invalidateAll } from '$app/navigation';
 
-  let price = $state(200);
   const { data } = $props();
   let items = $state(copyItems(data.items));
   $effect(() => {
     items = copyItems(data.items);
   });
+  let price = $state(items[1].price);
 
   function changePrice() {
     items[1].price = price;
