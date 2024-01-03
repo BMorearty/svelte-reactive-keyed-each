@@ -1,26 +1,35 @@
 <script>
-  import { cloneDeep } from 'lodash-es';
   import { invalidateAll } from '$app/navigation';
 
   let price = $state(200);
   const { data } = $props();
-  let thing = $state({ items: cloneDeep(data.items) });
+  let items = $state(copyItems(data.items));
   $effect(() => {
-    thing = { items: cloneDeep(data.items) };
+    items = copyItems(data.items);
   });
 
   function changePrice() {
-    thing.items[1].price = price;
+    items[1].price = price;
+  }
+
+  // In my app I use lodash's cloneDeep, but for this demo I'll use a simple function
+  // to avoid dependencies
+  function copyItems(original) {
+    let newItems = [];
+    for (let i = 0; i < original.length; i++) {
+      newItems[i] = { ...original[i] };
+    }
+    return newItems;
   }
 </script>
 
 <h2>Unkeyed <code>#each</code> (reactive)</h2>
-{#each thing.items as item}
+{#each items as item}
   <p>{item.name} costs ${item.price}</p>
 {/each}
 
-<h2>Keyed <code>#each</code> (not reactive)</h2>
-{#each thing.items as item (item.id)}
+<h2>Keyed <code>#each</code> (should be reactive but is not)</h2>
+{#each items as item (item.id)}
   <p>{item.name} costs ${item.price}</p>
 {/each}
 
