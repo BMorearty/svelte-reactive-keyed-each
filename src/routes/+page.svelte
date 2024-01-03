@@ -6,7 +6,7 @@
   $effect(() => {
     items = copyItems(data.items);
   });
-  let price = $state(items[1].price);
+  let price = $state(200);
 
   function changePrice() {
     items[1].price = price;
