@@ -15,11 +15,7 @@
   // In my app I use lodash's cloneDeep, but for this demo I'll use a simple function
   // to avoid dependencies
   function copyItems(original) {
-    let newItems = [];
-    for (let i = 0; i < original.length; i++) {
-      newItems[i] = { ...original[i] };
-    }
-    return newItems;
+    return [...original.map((item) => ({ ...item }))];
   }
 </script>
 
