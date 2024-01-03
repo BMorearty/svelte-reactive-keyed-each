@@ -33,7 +33,7 @@
   <p>{item.name} costs ${item.price}</p>
 {/each}
 
-<h2>Change item 2's price. The keyed <code>#each</code> won’t update:</h2>
+<h2>Change 2nd item’s price. The keyed <code>#each</code> won’t update:</h2>
 <form on:submit={changePrice}>
   <input bind:value={price} />
   <button type="submit">Change price</button>
